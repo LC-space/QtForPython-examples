@@ -52,11 +52,14 @@ from PySide6.QtWidgets import (QApplication, QPushButton)
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+    # 创建按钮对象，显示文本，设置尺寸，设置字体
     quit = QPushButton("Quit")
     quit.resize(75, 30)
     quit.setFont(QFont("Times", 18, QFont.Bold))
 
+    # 点击按钮发送信号
     quit.clicked.connect(app.quit)
 
+    # 显示按钮
     quit.show()
     sys.exit(app.exec())

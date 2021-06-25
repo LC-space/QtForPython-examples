@@ -51,15 +51,18 @@ from PySide6.QtWidgets import (QApplication, QGridLayout, QLCDNumber,
 
 
 class LCDRange(QWidget):
+    """创建一个自定义控件，包含一个数码管和一个滑块"""
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 创建数码管、滑块
         lcd = QLCDNumber(2)
         slider = QSlider(Qt.Horizontal)
         slider.setRange(0, 99)
         slider.setValue(0)
         slider.valueChanged.connect(lcd.display)
 
+        # 创建垂直布局，放入数码管和滑块
         layout = QVBoxLayout(self)
         layout.addWidget(lcd)
         layout.addWidget(slider)
@@ -69,10 +72,13 @@ class MyWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 创建退出按钮
         quit = QPushButton("Quit")
         quit.setFont(QFont("Times", 18, QFont.Bold))
         quit.clicked.connect(qApp.quit)
 
+        # 创建垂直布局，放入退出按钮和一个网格布局
+        # 网格布局大小为3×3，每格放入一个数码管＋滑块控件
         layout = QVBoxLayout(self)
         layout.addWidget(quit)
         grid = QGridLayout()

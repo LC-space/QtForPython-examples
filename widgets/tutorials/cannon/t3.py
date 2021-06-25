@@ -51,9 +51,11 @@ from PySide6.QtWidgets import (QApplication, QPushButton, QWidget)
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+    # 创建widget对象，设置尺寸
     window = QWidget()
     window.resize(200, 120)
 
+    # 创建退出按钮
     quit = QPushButton("Quit", window)
     quit.setFont(QFont("Times", 18, QFont.Bold))
     quit.setGeometry(10, 40, 180, 40)

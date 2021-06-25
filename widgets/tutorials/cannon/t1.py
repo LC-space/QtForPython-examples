@@ -50,9 +50,11 @@ from PySide6.QtWidgets import QApplication, QPushButton
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+    # 创建按钮对象，显示文本，设置尺寸
     hello = QPushButton("Hello world!")
     hello.resize(100, 30)
 
+    # 显示按钮
     hello.show()
 
     sys.exit(app.exec())

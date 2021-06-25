@@ -52,29 +52,36 @@ from PySide6.QtWidgets import (QApplication, QGridLayout, QLCDNumber,
 
 class LCDRange(QWidget):
 
+    # 定义值改变信号
     value_changed = Signal(int)
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 创建两位数码管
         lcd = QLCDNumber(2)
 
+        # 创建滑块
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0, 99)
         self.slider.setValue(0)
 
+        # 滑动滑块发出信号，改变数码管显示、发出值改变信号
         self.slider.valueChanged.connect(lcd.display)
         self.slider.valueChanged.connect(self.value_changed)
 
+        # 创建垂直布局，放入数码管、滑块
         layout = QVBoxLayout(self)
         layout.addWidget(lcd)
         layout.addWidget(self.slider)
 
     def value(self):
+        """取滑块的值"""
         return self.slider.value()
 
     @Slot(int)
     def set_value(self, value):
+        """设置滑块的值"""
         self.slider.setValue(value)
 
 
@@ -82,25 +89,31 @@ class MyWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 创建退出按钮
         quit = QPushButton("Quit")
         quit.setFont(QFont("Times", 18, QFont.Bold))
         quit.clicked.connect(qApp.quit)
 
+        # 创建一个空对象，用于存放已经存在的数码管＋滑块控件
         previous_range = None
 
+        # 创建垂直布局，放入退出按钮、网格布局
         layout = QVBoxLayout(self)
         layout.addWidget(quit)
         grid = QGridLayout()
         layout.addLayout(grid)
 
+        # 在网格布局中放入数码管＋滑块控件
         for row in range(3):
             for column in range(3):
                 lcd_range = LCDRange()
                 grid.addWidget(lcd_range, row, column)
 
+                # 如果该控件之前有控件，则在改变该控件值的同时也改变之前控件的值
                 if previous_range:
                     lcd_range.value_changed.connect(previous_range.set_value)
 
+                # 将生成的数码管＋滑块控件加入已存在控件对象
                 previous_range = lcd_range
 
 

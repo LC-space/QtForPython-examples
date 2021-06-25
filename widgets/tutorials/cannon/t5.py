@@ -54,18 +54,23 @@ class MyWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 创建退出按钮
         quit = QPushButton("Quit")
         quit.setFont(QFont("Times", 18, QFont.Bold))
 
+        # 创建两位数数码管
         lcd = QLCDNumber(2)
 
+        # 创建水平滑块，范围0~99，初始值为0
         slider = QSlider(Qt.Horizontal)
         slider.setRange(0, 99)
         slider.setValue(0)
 
+        # 按钮发出信号后退出、滑块发出信号后数码管显示
         quit.clicked.connect(qApp.quit)
         slider.valueChanged.connect(lcd.display)
 
+        # 设置纵向布局，依次放入按钮、数码管、滑块
         layout = QVBoxLayout(self)
         layout.addWidget(quit)
         layout.addWidget(lcd)

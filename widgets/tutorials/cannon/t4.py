@@ -49,15 +49,19 @@ from PySide6.QtWidgets import (QApplication, QPushButton, QWidget)
 
 
 class MyWidget(QWidget):
+    """创建自定义窗口"""
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # 设置窗口尺寸
         self.setFixedSize(200, 120)
 
+        # 创建退出按钮
         self.quit = QPushButton("Quit", self)
         self.quit.setGeometry(62, 40, 75, 30)
         self.quit.setFont(QFont("Times", 18, QFont.Bold))
 
+        # 设置退出信号
         self.quit.clicked.connect(qApp.quit)
 
 
